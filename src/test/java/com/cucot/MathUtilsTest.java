@@ -77,7 +77,6 @@ class MathUtilsTest {
     @DisabledOnOs(OS.WINDOWS)
     @Tag("conditionally_disabled")
     void disabledOnWindows() {
-        System.out.println("Running with tag " + testInfo.getTags() + " and name " + testInfo.getDisplayName());
         fail("Inprogress on windows");
     }
 
