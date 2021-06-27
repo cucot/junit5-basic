@@ -13,6 +13,7 @@ import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -46,7 +47,11 @@ class MathUtilsTest {
     @Test
     @DisplayName("Normal Add execution, neither overflow nor underflow")
     void addNormal() {
-        assertEquals(3, mathUtils.add(1, 2));
+        assertAll(
+                () -> assertEquals(-10, mathUtils.add(-3, -7)),
+                () -> assertEquals(-50, mathUtils.add(-100, 50))
+        );
+
     }
 
     @Test
