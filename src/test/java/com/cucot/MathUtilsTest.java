@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.condition.DisabledOnOs;
@@ -80,6 +82,11 @@ class MathUtilsTest {
     void skipthis() {
         assumeTrue(false);
         fail("This will fail if run through this");
+    }
+
+    @RepeatedTest(3)
+    void checkMe(RepetitionInfo repetitionInfo) {
+        System.out.println("Testing " + repetitionInfo.getCurrentRepetition() + " time");
     }
 
     @Nested
