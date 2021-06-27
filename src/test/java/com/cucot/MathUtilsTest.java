@@ -12,7 +12,9 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestReporter;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -23,15 +25,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 @DisplayName("Testing Math Utils")
 class MathUtilsTest {
 
     MathUtils mathUtils;
+    TestInfo testInfo;
+    TestReporter testReporter;
 
     @BeforeAll
-    void initMathUtil() {
-        mathUtils = new MathUtils();
+    static void initMathUtil() {
+
     }
 
     @AfterAll
@@ -45,8 +49,12 @@ class MathUtilsTest {
     }
 
     @BeforeEach
-    void init() {
-        System.out.println("This is executed before each test is run");
+    void showInfo(TestInfo testInfo, TestReporter testReporter) {
+        mathUtils = new MathUtils();
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
+//        System.out.println("Running " + testInfo.getDisplayName());
+        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " in tag " + testInfo.getTags());
     }
 
 
@@ -67,7 +75,9 @@ class MathUtilsTest {
     @Test
     @DisplayName("This test will be disabled on WINDOWS")
     @DisabledOnOs(OS.WINDOWS)
+    @Tag("conditionally_disabled")
     void disabledOnWindows() {
+        System.out.println("Running with tag " + testInfo.getTags() + " and name " + testInfo.getDisplayName());
         fail("Inprogress on windows");
     }
 
