@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.condition.DisabledOnOs;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("Testing Math Utils")
 class MathUtilsTest {
 
     MathUtils mathUtils;
@@ -44,27 +46,6 @@ class MathUtilsTest {
         System.out.println("This is executed before each test is run");
     }
 
-    @Test
-    @DisplayName("Normal Add execution, neither overflow nor underflow")
-    void addNormal() {
-        assertAll(
-                () -> assertEquals(-10, mathUtils.add(-3, -7)),
-                () -> assertEquals(-50, mathUtils.add(-100, 50))
-        );
-
-    }
-
-    @Test
-    @DisplayName("Add with overflow")
-    void addExceedMaxInteger() {
-        assertThrows(RuntimeException.class, () -> mathUtils.add(Integer.MAX_VALUE, 1), "Adding with overflow will lead to incorrect calculation and should be prevent. Consider to use long instead");
-    }
-
-    @Test
-    @DisplayName("Add with underflow")
-    void addExceedMinInteger() {
-        assertThrows(RuntimeException.class, () -> mathUtils.add(Integer.MIN_VALUE, -1), "Result < Integer.MIN_VALUE will lead to overflow, cause unintended incorrect calculation");
-    }
 
     @Test
     @DisplayName("This test will be disabled")
@@ -99,5 +80,31 @@ class MathUtilsTest {
     void skipthis() {
         assumeTrue(false);
         fail("This will fail if run through this");
+    }
+
+    @Nested
+    @DisplayName("Testing add function")
+    class AddTest {
+        @Test
+        @DisplayName("Normal Add execution, neither overflow nor underflow")
+        void addNormal() {
+            assertAll(
+                    () -> assertEquals(-10, mathUtils.add(-3, -7)),
+                    () -> assertEquals(-50, mathUtils.add(-100, 50))
+            );
+
+        }
+
+        @Test
+        @DisplayName("Add with overflow")
+        void addExceedMaxInteger() {
+            assertThrows(RuntimeException.class, () -> mathUtils.add(Integer.MAX_VALUE, 1), "Adding with overflow will lead to incorrect calculation and should be prevent. Consider to use long instead");
+        }
+
+        @Test
+        @DisplayName("Add with underflow")
+        void addExceedMinInteger() {
+            assertThrows(RuntimeException.class, () -> mathUtils.add(Integer.MIN_VALUE, -1), "Result < Integer.MIN_VALUE will lead to overflow, cause unintended incorrect calculation");
+        }
     }
 }
