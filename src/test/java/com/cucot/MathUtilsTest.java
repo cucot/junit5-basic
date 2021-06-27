@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -58,10 +61,30 @@ class MathUtilsTest {
     }
 
     @Test
-    @DisplayName("Fail this test")
+    @DisplayName("This test will be disabled")
     @Disabled
     void failThis() {
         fail("This test should not be run");
     }
 
+    @Test
+    @DisplayName("This test will be disabled on LINUX")
+    @DisabledOnOs(OS.LINUX)
+    void disabledOnLinux() {
+        fail("Inprogress");
+    }
+
+    @Test
+    @DisplayName("This test will be disabled on WINDOWS")
+    @DisabledOnOs(OS.WINDOWS)
+    void disabledOnWindows() {
+        fail("Inprogress on windows");
+    }
+
+    @Test
+    @DisplayName("Test will be enabled on Linux, which lead to a fail")
+    @EnabledOnOs(OS.LINUX)
+    void enabledOnLinux() {
+        fail();
+    }
 }
