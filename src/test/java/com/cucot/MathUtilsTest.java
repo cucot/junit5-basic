@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MathUtilsTest {
 
-    MathUtils mathUtils;
+    static MathUtils mathUtils;
 
     @BeforeAll
     static void initMathUtil() {
-        System.out.println("Preparing class level");
-//        mathUtils = new MathUtils();
+        mathUtils = new MathUtils();
     }
 
     @AfterAll
@@ -26,7 +25,7 @@ class MathUtilsTest {
 
     @BeforeEach
     void init() {
-        this.mathUtils = new MathUtils();
+        System.out.println("This should be used for member variable instantiation");
     }
 
     @Test
