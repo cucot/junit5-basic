@@ -1,7 +1,6 @@
 package com.cucot;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +10,23 @@ class MathUtilsTest {
 
     @BeforeAll
     static void initMathUtil() {
+        System.out.println("Preparing class level");
         mathUtils = new MathUtils();
+    }
+
+    @AfterAll
+    static void showCompleteness() {
+        System.out.println("Completed all test cases in this class");
+    }
+
+    @AfterEach
+    void showEachCompletion() {
+        System.out.println("Complete one test");
+    }
+
+    @BeforeEach
+    void showEachPreparation() {
+        System.out.println("Preparing one test");
     }
 
     @Test
