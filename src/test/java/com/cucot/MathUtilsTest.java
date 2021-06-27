@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MathUtilsTest {
 
-    static MathUtils mathUtils;
+    MathUtils mathUtils;
 
     @BeforeAll
     static void initMathUtil() {
         System.out.println("Preparing class level");
-        mathUtils = new MathUtils();
+//        mathUtils = new MathUtils();
     }
 
     @AfterAll
@@ -25,8 +25,8 @@ class MathUtilsTest {
     }
 
     @BeforeEach
-    void showEachPreparation() {
-        System.out.println("Preparing one test");
+    void init() {
+        this.mathUtils = new MathUtils();
     }
 
     @Test
