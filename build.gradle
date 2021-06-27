@@ -16,6 +16,7 @@ dependencies {
 
 test {
     useJUnitPlatform {
+        JUnitPlatformOptions options -> options.includeTags("addition")
     }
 
 }
