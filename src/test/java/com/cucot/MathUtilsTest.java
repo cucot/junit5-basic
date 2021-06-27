@@ -89,10 +89,10 @@ class MathUtilsTest {
         @DisplayName("Normal Add execution, neither overflow nor underflow")
         void addNormal() {
             assertAll(
-                    () -> assertEquals(-10, mathUtils.add(-3, -7)),
-                    () -> assertEquals(-50, mathUtils.add(-100, 50))
+                    () -> assertEquals(-10, mathUtils.add(-3, -7), String.format("%d + %d should return %d", -3, -7, -10)),
+                    () -> assertEquals(-50, mathUtils.add(-100, 50)),
+                    () -> assertEquals(0, mathUtils.add(-500, 500), () -> String.format("%d + %d should return %d", -3, -7, -10))
             );
-
         }
 
         @Test
