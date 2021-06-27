@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -37,16 +38,19 @@ class MathUtilsTest {
     }
 
     @Test
+    @DisplayName("Normal Add execution, neither overflow nor underflow")
     void addNormal() {
         assertEquals(3, mathUtils.add(1, 2));
     }
 
     @Test
+    @DisplayName("Add with overflow")
     void addExceedMaxInteger() {
         assertThrows(RuntimeException.class, () -> mathUtils.add(Integer.MAX_VALUE, 1), "Adding with overflow will lead to incorrect calculation and should be prevent. Consider to use long instead");
     }
 
     @Test
+    @DisplayName("Add with underflow")
     void addExceedMinInteger() {
         assertThrows(RuntimeException.class, () -> mathUtils.add(Integer.MIN_VALUE, -1), "Result < Integer.MIN_VALUE will lead to overflow, cause unintended incorrect calculation");
     }
