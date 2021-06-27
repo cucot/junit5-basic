@@ -16,6 +16,7 @@ import org.junit.jupiter.api.condition.OS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MathUtilsTest {
@@ -86,5 +87,12 @@ class MathUtilsTest {
     @EnabledOnOs(OS.LINUX)
     void enabledOnLinux() {
         fail();
+    }
+
+    @Test
+    @DisplayName("Programmatically running the test")
+    void skipthis() {
+        assumeTrue(false);
+        fail("This will fail if run through this");
     }
 }
